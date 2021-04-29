@@ -30,7 +30,13 @@ class ExampleServer extends Server {
 
 	public start(port: number): Serve {
 		this.app.get("*", (req, res) => {
-			res.send(this.SERVER_STARTED + port);
+			if (process.env.KUBER_ID) {
+				res.send(
+					this.SERVER_STARTED + port + ". This is pod: " + process.env.KUBER_ID
+				);
+			} else {
+				res.send(this.SERVER_STARTED + port);
+			}
 		});
 		return this.app.listen(port, "0.0.0.0", () => {
 			Logger.Imp(this.SERVER_STARTED + port);

@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-config
+  labels:
+    app: postgres
+    kind: db
+stringData:
+  POSTGRES_DB:
+    valueFrom:
+      secretKeyRef:
+        name: postgres-secrets
+        key: postgresdb
+  POSTGRES_USER:
+    valueFrom:
+      secretKeyRef:
+        name: postgres-secrets
+        key: postgresuser
+  POSTGRES_PASSWORD:
+    valueFrom:
+      secretKeyRef:
+        name: postgres-secrets
+        key: postgrespassword

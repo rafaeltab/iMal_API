@@ -1,0 +1,19 @@
+{
+	"staging": {
+		"url": "postgres://ffltlmgxabqjmh:d9fd0d1f26f5602bd0200d00e71c4ce09778b478dfe01aa2455ed2e014ba6490@ec2-46-137-124-19.eu-west-1.compute.amazonaws.com:5432/deh1s8qvtn1qjr",
+		"dialect": "postgres",
+		"ssl": true,
+		"dialectOptions": {
+			"ssl": {
+				"rejectUnauthorized": false
+			}
+		}
+	},
+	"development": {
+		"username": "postgres",
+		"password": "Fossil2001!",
+		"database": "imaltest",
+		"host": "127.0.0.1",
+		"dialect": "postgres"
+	}
+}

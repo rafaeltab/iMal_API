@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: imalapi-deployment
+  labels:
+    app: imalapi
+    kind: api
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: imalapi
+  template:
+    metadata:
+      labels:
+        app: imalapi
+    spec:
+      containers:
+        - name: imalapi
+          image: rafaeltab/imalapi:latest
+          resources:
+            limits:
+              cpu: "100m"
+              memory: 128Mi
+          env:
+            - name: KUBER_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.uid
+            - name: CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: test-secret
+                  key: clientid
+            - name: CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: test-secret
+                  key: clientsecret
+            - name: PASSWORD_ENCR
+              valueFrom:
+                secretKeyRef:
+                  name: test-secret
+                  key: passwordencr
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: test-secret
+                  key: databaseurl
+            - name: SENDGRID_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: test-secret
+                  key: sendgridapikey
+          ports:
+            - containerPort: 15000
